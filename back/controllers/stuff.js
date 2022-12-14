@@ -1,6 +1,5 @@
 const Sauce = require('../models/thing');
 const fs = require('fs');
-const bodyParser = require('body-parser');
 
 exports.createThing = (req, res, next) => {
 
