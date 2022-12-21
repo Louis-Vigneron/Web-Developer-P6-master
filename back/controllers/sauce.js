@@ -84,19 +84,16 @@ exports.likeSauce = (req, res, next) => {
 
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
+            res.status(200).json(sauce);
             if (like === 1) {
-                res.status(200).json(sauce);
                 sauce.usersLiked.push(userId);
                 sauce.likes = sauce.usersLiked.length;
             }
             if (like === -1) {
-
-                res.status(200).json({ message: 'I hate !' });
                 sauce.usersDisliked.push(userId);
                 sauce.dislikes = sauce.usersDisliked.length;
             }
             if (like === 0) {
-                res.status(200).json({ message: 'Neutral' })
                 if (userId.includes(sauce.usersLiked)) {
                     sauce.usersLiked = sauce.usersLiked.filter(user => user !== userId)
                     sauce.likes = sauce.usersLiked.length;
@@ -108,7 +105,6 @@ exports.likeSauce = (req, res, next) => {
             }
             console.log(sauce);
             sauce.save()
-
         })
         .catch((error) => { res.status(400).json({ error }) });
 }
