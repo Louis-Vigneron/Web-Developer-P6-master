@@ -1,13 +1,17 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 
+const username = process.env.DB_USER;
+const password = process.env.DB_PASSWORD;
+
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
-mongoose.connect('mongodb+srv://Louis:1234@cluster0.ozbeyw8.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.ozbeyw8.mongodb.net/?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
