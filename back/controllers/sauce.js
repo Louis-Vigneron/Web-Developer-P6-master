@@ -97,11 +97,12 @@ exports.likeSauce = (req, res, next) => {
             }
 
             if (like === -1) {
-                if (sauce.usersDisliked.includes(userId) || sauce.usersLiked.includes(userId)) return res.status(400).json({ message: 'Action non autorisée !' })                                        
+                if (sauce.usersDisliked.includes(userId) || sauce.usersLiked.includes(userId)) return res.status(400).json({ message: 'Action non autorisée !' })
                 sauce.usersDisliked.push(userId);
                 sauce.dislikes = sauce.usersDisliked.length;
-                res.status(200).json({ message: 'Score down !' });}
-            
+                res.status(200).json({ message: 'Score down !' });
+            }
+
             if (like === 0) {
                 if (sauce.usersLiked.includes(userId)) {
                     sauce.usersLiked = sauce.usersLiked.filter(user => user !== userId)
