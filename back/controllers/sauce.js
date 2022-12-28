@@ -1,6 +1,7 @@
 const Sauce = require('../models/sauce');
 const fs = require('fs');
 
+// Création d'une sauce
 exports.createSauce = (req, res, next) => {
 
     const sauce = JSON.parse(req.body.sauce);
@@ -28,6 +29,7 @@ exports.createSauce = (req, res, next) => {
         .catch(error => { res.status(400).json({ error }) })
 };
 
+// Modification d'une sauce existante
 exports.modifySauce = (req, res, next) => {
     const sauceObject = req.file ? {
         ...JSON.parse(req.body.sauce),
@@ -52,6 +54,7 @@ exports.modifySauce = (req, res, next) => {
         .catch((error) => { res.status(400).json({ error }) });
 };
 
+// Suppression d'une sauce
 exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => {
@@ -71,18 +74,21 @@ exports.deleteSauce = (req, res, next) => {
         });
 };
 
+// Récupération d'une sauce 
 exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => res.status(200).json(sauce))
         .catch(error => res.status(404).json({ error }));
 }
 
+// Récupération de toutes les sauces
 exports.getAllSauce = (req, res, next) => {
     Sauce.find()
         .then(sauces => res.status(200).json(sauces))
         .catch(error => res.status(400).json({ error }));
 }
 
+// Gestion du score des sauces
 exports.likeSauce = (req, res, next) => {
     const { like, userId } = req.body;
 
