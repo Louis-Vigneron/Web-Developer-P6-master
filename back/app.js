@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const helmet = require("helmet");
 const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
@@ -32,4 +33,9 @@ app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
+app.use(helmet({crossOriginResourcePolicy: false,}));
+
 module.exports = app;
+
+
+
