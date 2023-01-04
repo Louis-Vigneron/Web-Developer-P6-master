@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
+const mongoSanitize = require('express-mongo-sanitize');
 
 const username = process.env.DB_USER;
 const password = process.env.DB_PASSWORD;
@@ -34,6 +35,8 @@ app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use(helmet({crossOriginResourcePolicy: false,}));
+
+app.use(mongoSanitize());
 
 module.exports = app;
 
